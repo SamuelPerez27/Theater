@@ -14,7 +14,16 @@ namespace Capa_Entidad
     
     public partial class Director
     {
-        public int Id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Director()
+        {
+            this.Pelicula = new HashSet<Pelicula>();
+        }
+    
+        public int ID_Director { get; set; }
         public string Nombre_Completo { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pelicula> Pelicula { get; set; }
     }
 }

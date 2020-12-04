@@ -7,16 +7,16 @@
       <Schema Namespace="TheaterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Director">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ID_Director" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Director" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre_Completo" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="Genero">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ID_Genero" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Genero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre_Genero" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="Loogin">
@@ -30,29 +30,41 @@
         </EntityType>
         <EntityType Name="Pelicula">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ID_Pelicula" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Pelicula" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Titulo" Type="varchar" MaxLength="30" />
-          <Property Name="Id_Genero" Type="int" />
+          <Property Name="ID_Genero" Type="int" />
           <Property Name="Duracion" Type="varchar" MaxLength="30" />
-          <Property Name="Id_Director" Type="int" />
+          <Property Name="ID_Director" Type="int" />
           <Property Name="Protagonista" Type="varchar" MaxLength="30" />
           <Property Name="Sipnosis" Type="varchar" MaxLength="500" />
-          <Property Name="Media" Type="varchar" MaxLength="100" />
-          <Property Name="Imagen" Type="varchar" MaxLength="50" />
+          <Property Name="Media" Type="nvarchar" MaxLength="500" />
+          <Property Name="Imagen" Type="nvarchar" MaxLength="500" />
           <Property Name="Estudio" Type="varchar" MaxLength="50" />
           <Property Name="FechaLanzamiento" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__Pelicula__Id_Gen__164452B1">
+        <Association Name="FK__Pelicula__ID_Dir__20C1E124">
+          <End Role="Director" Type="Self.Director" Multiplicity="0..1" />
+          <End Role="Pelicula" Type="Self.Pelicula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Director">
+              <PropertyRef Name="ID_Director" />
+            </Principal>
+            <Dependent Role="Pelicula">
+              <PropertyRef Name="ID_Director" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pelicula__ID_Gen__1FCDBCEB">
           <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
           <End Role="Pelicula" Type="Self.Pelicula" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Genero">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="ID_Genero" />
             </Principal>
             <Dependent Role="Pelicula">
-              <PropertyRef Name="Id_Genero" />
+              <PropertyRef Name="ID_Genero" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -67,7 +79,11 @@
           <EntitySet Name="Genero" EntityType="Self.Genero" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Loogin" EntityType="Self.Loogin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pelicula" EntityType="Self.Pelicula" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Pelicula__Id_Gen__164452B1" Association="Self.FK__Pelicula__Id_Gen__164452B1">
+          <AssociationSet Name="FK__Pelicula__ID_Dir__20C1E124" Association="Self.FK__Pelicula__ID_Dir__20C1E124">
+            <End Role="Director" EntitySet="Director" />
+            <End Role="Pelicula" EntitySet="Pelicula" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pelicula__ID_Gen__1FCDBCEB" Association="Self.FK__Pelicula__ID_Gen__1FCDBCEB">
             <End Role="Genero" EntitySet="Genero" />
             <End Role="Pelicula" EntitySet="Pelicula" />
           </AssociationSet>
@@ -79,18 +95,19 @@
       <Schema Namespace="TheaterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Director">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ID_Director" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Director" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre_Completo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pelicula" Relationship="Self.FK__Pelicula__ID_Dir__20C1E124" FromRole="Director" ToRole="Pelicula" />
         </EntityType>
         <EntityType Name="Genero">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ID_Genero" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Genero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre_Genero" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Pelicula" Relationship="Self.FK__Pelicula__Id_Gen__164452B1" FromRole="Genero" ToRole="Pelicula" />
+          <NavigationProperty Name="Pelicula" Relationship="Self.FK__Pelicula__ID_Gen__1FCDBCEB" FromRole="Genero" ToRole="Pelicula" />
         </EntityType>
         <EntityType Name="Loogin">
           <Key>
@@ -103,30 +120,43 @@
         </EntityType>
         <EntityType Name="Pelicula">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ID_Pelicula" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Pelicula" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Titulo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Id_Genero" Type="Int32" />
+          <Property Name="ID_Genero" Type="Int32" />
           <Property Name="Duracion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Id_Director" Type="Int32" />
+          <Property Name="ID_Director" Type="Int32" />
           <Property Name="Protagonista" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Sipnosis" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Media" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Imagen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Media" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Imagen" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Estudio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FechaLanzamiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Genero" Relationship="Self.FK__Pelicula__Id_Gen__164452B1" FromRole="Pelicula" ToRole="Genero" />
+          <NavigationProperty Name="Director" Relationship="Self.FK__Pelicula__ID_Dir__20C1E124" FromRole="Pelicula" ToRole="Director" />
+          <NavigationProperty Name="Genero" Relationship="Self.FK__Pelicula__ID_Gen__1FCDBCEB" FromRole="Pelicula" ToRole="Genero" />
         </EntityType>
-        <Association Name="FK__Pelicula__Id_Gen__164452B1">
+        <Association Name="FK__Pelicula__ID_Dir__20C1E124">
+          <End Role="Director" Type="Self.Director" Multiplicity="0..1" />
+          <End Role="Pelicula" Type="Self.Pelicula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Director">
+              <PropertyRef Name="ID_Director" />
+            </Principal>
+            <Dependent Role="Pelicula">
+              <PropertyRef Name="ID_Director" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pelicula__ID_Gen__1FCDBCEB">
           <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
           <End Role="Pelicula" Type="Self.Pelicula" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Genero">
-              <PropertyRef Name="Id" />
+              <PropertyRef Name="ID_Genero" />
             </Principal>
             <Dependent Role="Pelicula">
-              <PropertyRef Name="Id_Genero" />
+              <PropertyRef Name="ID_Genero" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -135,7 +165,11 @@
           <EntitySet Name="Genero" EntityType="Self.Genero" />
           <EntitySet Name="Loogin" EntityType="Self.Loogin" />
           <EntitySet Name="Pelicula" EntityType="Self.Pelicula" />
-          <AssociationSet Name="FK__Pelicula__Id_Gen__164452B1" Association="Self.FK__Pelicula__Id_Gen__164452B1">
+          <AssociationSet Name="FK__Pelicula__ID_Dir__20C1E124" Association="Self.FK__Pelicula__ID_Dir__20C1E124">
+            <End Role="Director" EntitySet="Director" />
+            <End Role="Pelicula" EntitySet="Pelicula" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pelicula__ID_Gen__1FCDBCEB" Association="Self.FK__Pelicula__ID_Gen__1FCDBCEB">
             <End Role="Genero" EntitySet="Genero" />
             <End Role="Pelicula" EntitySet="Pelicula" />
           </AssociationSet>
@@ -147,7 +181,7 @@
           <FunctionImport Name="ListarUltimaPelicula" ReturnType="Collection(TheaterModel.ListarUltimaPelicula_Result)" />
         </EntityContainer>
         <ComplexType Name="ListarPelicula_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="ID_Pelicula" Nullable="false" />
           <Property Type="String" Name="Titulo" Nullable="true" MaxLength="30" />
           <Property Type="Int32" Name="Id_Genero" Nullable="true" />
           <Property Type="String" Name="Nombre_Genero" Nullable="true" MaxLength="30" />
@@ -156,13 +190,13 @@
           <Property Type="String" Name="Nombre_Completo" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="Protagonista" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="Sipnosis" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="Media" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Imagen" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Media" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Imagen" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="Estudio" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="FechaLanzamiento" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="ListarUltimaPelicula_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="ID_pelicula" Nullable="false" />
           <Property Type="String" Name="Titulo" Nullable="true" MaxLength="30" />
           <Property Type="Int32" Name="Id_Genero" Nullable="true" />
           <Property Type="String" Name="Nombre_Genero" Nullable="true" MaxLength="30" />
@@ -171,8 +205,8 @@
           <Property Type="String" Name="Nombre_Completo" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="Protagonista" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="Sipnosis" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="Media" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Imagen" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Media" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Imagen" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="Estudio" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="FechaLanzamiento" Nullable="true" MaxLength="50" />
         </ComplexType>
@@ -185,7 +219,7 @@
           <EntitySetMapping Name="Director">
             <EntityTypeMapping TypeName="TheaterModel.Director">
               <MappingFragment StoreEntitySet="Director">
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ID_Director" ColumnName="ID_Director" />
                 <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -193,7 +227,7 @@
           <EntitySetMapping Name="Genero">
             <EntityTypeMapping TypeName="TheaterModel.Genero">
               <MappingFragment StoreEntitySet="Genero">
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ID_Genero" ColumnName="ID_Genero" />
                 <ScalarProperty Name="Nombre_Genero" ColumnName="Nombre_Genero" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -211,11 +245,11 @@
           <EntitySetMapping Name="Pelicula">
             <EntityTypeMapping TypeName="TheaterModel.Pelicula">
               <MappingFragment StoreEntitySet="Pelicula">
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ID_Pelicula" ColumnName="ID_Pelicula" />
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-                <ScalarProperty Name="Id_Genero" ColumnName="Id_Genero" />
+                <ScalarProperty Name="ID_Genero" ColumnName="ID_Genero" />
                 <ScalarProperty Name="Duracion" ColumnName="Duracion" />
-                <ScalarProperty Name="Id_Director" ColumnName="Id_Director" />
+                <ScalarProperty Name="ID_Director" ColumnName="ID_Director" />
                 <ScalarProperty Name="Protagonista" ColumnName="Protagonista" />
                 <ScalarProperty Name="Sipnosis" ColumnName="Sipnosis" />
                 <ScalarProperty Name="Media" ColumnName="Media" />
@@ -232,7 +266,7 @@
           <FunctionImportMapping FunctionImportName="ListarPelicula" FunctionName="TheaterModel.Store.ListarPelicula">
             <ResultMapping>
               <ComplexTypeMapping TypeName="TheaterModel.ListarPelicula_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ID_Pelicula" ColumnName="ID_Pelicula" />
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
                 <ScalarProperty Name="Id_Genero" ColumnName="Id_Genero" />
                 <ScalarProperty Name="Nombre_Genero" ColumnName="Nombre_Genero" />
@@ -251,7 +285,7 @@
           <FunctionImportMapping FunctionImportName="ListarUltimaPelicula" FunctionName="TheaterModel.Store.ListarUltimaPelicula">
             <ResultMapping>
               <ComplexTypeMapping TypeName="TheaterModel.ListarUltimaPelicula_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ID_pelicula" ColumnName="ID_pelicula" />
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
                 <ScalarProperty Name="Id_Genero" ColumnName="Id_Genero" />
                 <ScalarProperty Name="Nombre_Genero" ColumnName="Nombre_Genero" />

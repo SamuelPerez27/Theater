@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Capa_Entidad;
 
+
 namespace Capa_Datos
 {
     public class Pelicula_D
     {
+     
         TheaterEntities db = new TheaterEntities();
         public List<Pelicula> ListarPelicula()
         {
@@ -16,8 +18,13 @@ namespace Capa_Datos
         }
         public void InsertarPelicula(Pelicula peliculas)
         {
+
             db.Pelicula.Add(peliculas);
+
             db.SaveChanges();
+
+     
+          
         }
         public void EliminarPelicula(int id)
         {
@@ -33,14 +40,14 @@ namespace Capa_Datos
         }
         public void EditarPelicula(Pelicula pel)
         {
-            var pelicula = db.Pelicula.Find(pel.Id);
+            var pelicula = db.Pelicula.Find(pel.ID_Pelicula);
 
             pelicula.Duracion = pel.Duracion;
             pelicula.Estudio = pel.Estudio;
             pelicula.FechaLanzamiento = pel.FechaLanzamiento;
             pelicula.Genero = pel.Genero;
-            pelicula.Id_Director = pel.Id_Director;
-            pelicula.Id_Genero = pel.Id_Genero;
+            pelicula.ID_Director = pel.ID_Director;
+            pelicula.ID_Genero = pel.ID_Genero;
             pelicula.Imagen = pel.Imagen;
             pelicula.Media = pel.Media;
             pelicula.Protagonista = pel.Protagonista;

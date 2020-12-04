@@ -18,7 +18,7 @@ namespace Capa_Presentacion.Controllers
             return new SelectListItem()
             {
                 Text = c.Nombre_Genero.ToString(),
-                Value = c.Id.ToString(),
+                Value = c.ID_Genero.ToString(),
                 Selected = false
             };
         }
@@ -29,7 +29,7 @@ namespace Capa_Presentacion.Controllers
             return new SelectListItem()
             {
                 Text = c.Nombre_Completo.ToString(),
-                Value = c.Id.ToString(),
+                Value = c.ID_Director.ToString(), 
                 Selected = false
             };
         }
@@ -49,11 +49,15 @@ namespace Capa_Presentacion.Controllers
 
         public ActionResult VerPelicula()
         {
-            ViewBag.detalle = Pelicula_N.ListarPelicula().ToList();
+            ViewBag.detalle = Lista();
             return View();
         }
+        public ActionResult Lista()
+        {
+            return View(Listar_Pelicula.ListarPeliculas());
+        }
 
-
+  
         public ActionResult CrearPelicula()
         {
             ViewBag.ListaGenero = DropDownlistGenero;
@@ -61,11 +65,11 @@ namespace Capa_Presentacion.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CrearPelicula(Pelicula pelicula)
+        public ActionResult CrearPelicula(Pelicula peli)
         {
             try
             {
-                Pelicula_N.InsertarPelicula(pelicula);
+                Pelicula_N.InsertarPelicula(peli);
                 return RedirectToAction("VerPelicula");
             }
             catch (Exception)
@@ -75,29 +79,20 @@ namespace Capa_Presentacion.Controllers
         }
 
         //Delete Peliculas
-        public ActionResult EliminarPelicula(int? id)
-        {
-            if (id == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var Peli = Pelicula_N.GetPelicula(id.Value);
-            return View(Peli);
-        }
-        [HttpPost]
         public ActionResult EliminarPelicula(int id)
         {
-
-            try
-            {
-                Pelicula_N.EliminarPelicula(id);
-                return RedirectToAction("VerPelicula");
-            }
-            catch
-            {
-                return View();
-            }
+           
+            var Peli = Pelicula_N.GetPelicula(id);
+            return View(Peli);
         }
-
-
+        
+       
+        [HttpPost]
+        public ActionResult EliminarPeliculas(int id)
+        {
+            Pelicula_N.EliminarPelicula(id);
+            return RedirectToAction("VerPelicula");
+        }
         //Edit 
         public ActionResult EditarPeli(int peli)
         {
@@ -105,6 +100,8 @@ namespace Capa_Presentacion.Controllers
 
             ViewBag.ListaGenero = DropDownlistGenero;
             ViewBag.ListaDirector = DropDownlistDirector;
+            ViewBag.protagonistas = pelibuscada.Protagonista;
+            ViewBag.sipnosis = pelibuscada.Sipnosis;
             return View(pelibuscada);
         }
         
@@ -162,7 +159,7 @@ namespace Capa_Presentacion.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            var director = Director_N.GetDirector(id.Value);
+            var director =  Director_N.GetDirector(id.Value);
             return View(director);
         }
 

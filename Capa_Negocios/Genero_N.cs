@@ -10,7 +10,7 @@ namespace Capa_Negocios
 {
     public static class Genero_N
     {
-        private static Genero_D elemento = new Genero_D();
+         static Genero_D elemento = new Genero_D();
         public static List<Genero> ListarGenero()
         {
             return elemento.ListarGenero().ToList();

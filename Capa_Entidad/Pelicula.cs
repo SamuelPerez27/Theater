@@ -14,11 +14,11 @@ namespace Capa_Entidad
     
     public partial class Pelicula
     {
-        public int Id { get; set; }
+        public int ID_Pelicula { get; set; }
         public string Titulo { get; set; }
-        public Nullable<int> Id_Genero { get; set; }
+        public Nullable<int> ID_Genero { get; set; }
         public string Duracion { get; set; }
-        public Nullable<int> Id_Director { get; set; }
+        public Nullable<int> ID_Director { get; set; }
         public string Protagonista { get; set; }
         public string Sipnosis { get; set; }
         public string Media { get; set; }
@@ -26,6 +26,7 @@ namespace Capa_Entidad
         public string Estudio { get; set; }
         public string FechaLanzamiento { get; set; }
     
+        public virtual Director Director { get; set; }
         public virtual Genero Genero { get; set; }
     }
 }

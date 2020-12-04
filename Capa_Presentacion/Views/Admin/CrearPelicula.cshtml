@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "CrearPelicula";
-    Layout = "~/Views/Shared/_Admin.cshtml";
+    Layout = "~/Views/Shared/_Plantilla.cshtml";
     List<SelectListItem> DropDownListsGenero = (List<SelectListItem>)ViewBag.ListaGenero;
     List<SelectListItem> DropDownListDirector = (List<SelectListItem>)ViewBag.ListaDirector;
 }
@@ -69,8 +69,8 @@
                             Seleccione El Género de La Pelicula
                         </label>
                         <div class="col-md-6 col-sm-6">
-                            @Html.DropDownListFor(model => model.Id_Genero, DropDownListsGenero, "Seleccione un Género", new { @class = "form-control" })<ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required">Campo Obligatorio.</li></ul>
-                            @Html.ValidationMessageFor(model => model.Id_Genero, "", new { @class = "text-danger" })
+                            @Html.DropDownListFor(model => model.ID_Genero, DropDownListsGenero, "Seleccione un Género", new { @class = "form-control" })<ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required">Campo Obligatorio.</li></ul>
+                            @Html.ValidationMessageFor(model => model.ID_Genero ,"", new { @class = "text-danger" })
 
                         </div>
                     </div>
@@ -95,8 +95,8 @@
                         </label>
                         <div class="col-md-6 col-sm-6">
 
-                            @Html.DropDownListFor(model => model.Id_Director, DropDownListDirector, "Seleccione Un Director", new { @class = "form-control" })  <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required parsley-error">Campo Obligatorio.</li></ul>
-                            @Html.ValidationMessageFor(model => model.Id_Director, "", new { @class = "text-danger" })
+                            @Html.DropDownListFor(model => model.ID_Director, DropDownListDirector, "Seleccione Un Director", new { @class = "form-control" })  <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required parsley-error">Campo Obligatorio.</li></ul>
+                            @Html.ValidationMessageFor(model => model.ID_Director, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
@@ -152,6 +152,20 @@
                     </div>
 
 
+                    <br />
+
+
+
+
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name" style="font-size:16px;">
+                            Estudio Cinematografico
+                        </label>
+                        <div class="col-md-6 col-sm-6">
+                            <input name="Estudio" id="Estudio" type="text" required="required" class="form-control " data-parsley-id="5"> <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required parsley-error">Campo Obligatorio.</li></ul>
+                            @Html.ValidationMessageFor(model => model.Estudio, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                     <br />
 
                     <div class="ln_solid"></div>

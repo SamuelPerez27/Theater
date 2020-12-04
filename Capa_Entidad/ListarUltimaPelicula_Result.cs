@@ -13,7 +13,7 @@ namespace Capa_Entidad
     
     public partial class ListarUltimaPelicula_Result
     {
-        public int Id { get; set; }
+        public int ID_pelicula { get; set; }
         public string Titulo { get; set; }
         public Nullable<int> Id_Genero { get; set; }
         public string Nombre_Genero { get; set; }
