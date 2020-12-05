@@ -40,7 +40,7 @@ namespace Capa_Presentacion.Controllers
         {
             ViewBag.CantidadUsuarios = ConntarUsers();
             ViewBag.CantidadPeli = ConntarPelicula();
-            ViewBag.CantidadPeli = ConntarDirector();
+            ViewBag.director = ConntarDirector();
             ViewBag.genero = ConntarGenero();
 
             return View();
@@ -88,15 +88,18 @@ namespace Capa_Presentacion.Controllers
         
        
         [HttpPost]
-        public ActionResult EliminarPeliculas(int id)
+        public ActionResult EliminarPelicula(int id, FormCollection collection)
         {
-            Pelicula_N.EliminarPelicula(id);
-            return RedirectToAction("VerPelicula");
+                Pelicula_N.EliminarPelicula(id);
+                return RedirectToAction("VerPelicula");
+            
+           
         }
         //Edit 
-        public ActionResult EditarPeli(int peli)
+
+        public ActionResult EditarPeli(int id)
         {
-            var pelibuscada = Pelicula_N.GetPelicula(peli);
+            var pelibuscada = Pelicula_N.GetPelicula(id);
 
             ViewBag.ListaGenero = DropDownlistGenero;
             ViewBag.ListaDirector = DropDownlistDirector;
@@ -108,15 +111,11 @@ namespace Capa_Presentacion.Controllers
         [HttpPost]
         public ActionResult EditarPerli(Pelicula peli)
         {
-            try
-            {
+            
                 Pelicula_N.EditarPelicula(peli);
                 return RedirectToAction("VerPelicula");
-            }
-            catch
-             {
-                return View();
-            }
+           
+         
         }
 
 

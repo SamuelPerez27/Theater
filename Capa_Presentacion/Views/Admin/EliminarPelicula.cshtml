@@ -5,9 +5,10 @@
     Layout = "~/Views/Shared/_Plantilla.cshtml";
 }
 
-@using (Html.BeginForm("EliminarPeliculas", "Admin", FormMethod.Post))
-{
  
+@using (Html.BeginForm("EliminarPelicula", "Admin", FormMethod.Post))
+{
+
 <div class="col-md-12 col-sm-12">
     <div class="x_panel">
         <h3><i class="fa fa-film"></i> <b>   Módulo Pelicula  </b> </h3>
@@ -28,9 +29,9 @@
                 <div class="anime__details__content">
                     <div class="row">
                         <div class="col-lg-3">
-                            <div class="anime__details__pic set-bg" >
-                                <img src= @Html.DisplayFor(model => model.Imagen)/>
-                              
+                            <div class="anime__details__pic set-bg">
+                                <img src=@Html.DisplayFor(model => model.Imagen) />
+
 
                             </div>
                         </div>
@@ -38,6 +39,8 @@
                             <div class="anime__details__text">
                                 <div class="anime__details__title">
                                     <h3> @Html.DisplayFor(model => model.Titulo) </h3>
+                                    <div class="comment"><i class="fa fa-comments"></i> @Html.DisplayFor(model => model.ID_Pelicula) </div>
+
 
                                 </div>
                                 <div class="anime__details__rating">
@@ -48,7 +51,7 @@
                                         <a href="#"><i class="fa fa-star"></i></a>
                                         <a href="#"><i class="fa fa-star-half-o"></i></a>
                                     </div>
-                                    <span>1.029 Votes</span>
+
                                 </div>
                                 <p>
                                     @Html.DisplayFor(model => model.Sipnosis)
@@ -57,6 +60,8 @@
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6">
                                             <ul>
+
+
                                                 <li><span>Fecha De Lazamiento:</span> @Html.DisplayFor(model => model.FechaLanzamiento) </li>
                                                 <li><span>Estudio:</span> @Html.DisplayFor(model => model.Estudio)</li>
                                                 <li><span>Duracion </span> @Html.DisplayFor(model => model.Duracion)</li>
@@ -84,7 +89,8 @@
                 <div class="ln_solid"></div>
                 <div class="form-group">
                     <div class="col-md-6 col-sm-6 offset-md-3">
-                        <input type="submit" value="Eliminar" class="btn btn-primary " style="width:48%; height:42px; font-size:18px;" />
+                        <input type="submit" value="Eliminar" class="btn btn-primary" style="width:48%; height:42px; font-size:18px;" />
+
                         <a href="~/Admin/VerPelicula" class="btn btn-danger " type="reset" style="width:48%; height:42px; font-size:18px;"> Cancelar </a>
                     </div>
                 </div>
@@ -94,10 +100,4 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
 }

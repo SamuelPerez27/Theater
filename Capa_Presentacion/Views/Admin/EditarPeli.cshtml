@@ -26,10 +26,10 @@
 
                     <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name" style="font-size:16px;">
-                            ID De La Pelicual:
+                            ID De La Pelicula:
                         </label>
                         <div class="col-md-6 col-sm-6 ">
-                            <input readonly type="text" class="form-control" data-parsley-id="5" @Html.EditorFor(model => model.Id)
+                            <input readonly type="number" class="form-control" data-parsley-id="5" @Html.EditorFor(model => model.ID_Pelicula)
                         </div>
                     </div>
 
@@ -77,8 +77,8 @@
                             Seleccione El Género de La Pelicula
                         </label>
                         <div class="col-md-6 col-sm-6">
-                            @Html.DropDownListFor(model => model.Id_Genero, DropDownListsGenero, "Seleccione un Género", new { @class = "form-control" })<ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required">Campo Obligatorio.</li></ul>
-                            @Html.ValidationMessageFor(model => model.Id_Genero, "", new { @class = "text-danger" })
+                            @Html.DropDownListFor(model => model.ID_Genero, DropDownListsGenero, "Seleccione un Género", new { @class = "form-control" })<ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required">Campo Obligatorio.</li></ul>
+                            @Html.ValidationMessageFor(model => model.ID_Genero, "", new { @class = "text-danger" })
 
                         </div>
                     </div>
@@ -103,8 +103,8 @@
                         </label>
                         <div class="col-md-6 col-sm-6">
 
-                            @Html.DropDownListFor(model => model.Id_Director, DropDownListDirector, "Seleccione Un Director", new { @class = "form-control" })  <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required parsley-error">Campo Obligatorio.</li></ul>
-                            @Html.ValidationMessageFor(model => model.Id_Director, "", new { @class = "text-danger" })
+                            @Html.DropDownListFor(model => model.ID_Director, DropDownListDirector, "Seleccione Un Director", new { @class = "form-control" })  <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required parsley-error">Campo Obligatorio.</li></ul>
+                            @Html.ValidationMessageFor(model => model.ID_Director, "", new { @class = "text-danger" })
                         </div>
                     </div>
 

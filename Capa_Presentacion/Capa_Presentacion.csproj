@@ -1627,8 +1627,8 @@
     <Content Include="Views\Home\CrearCuenta.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Admin\EditarPeli.cshtml" />
-    <Content Include="Views\Admin\EliminarPelicula.cshtml" />
     <Content Include="Views\Shared\_Plantilla.cshtml" />
+    <Content Include="Views\Admin\EliminarPelicula.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
